@@ -5,6 +5,7 @@ print("====================================")
 
 project_name = input("\nProject Name: ")
 owner = input("Current Owner: ")
+new_owner = input("New Owner: ")
 status = input("Project Status (On Track/At Risk/Blocked): ")
 handoff_date = date.today()
 
@@ -28,6 +29,7 @@ print("\n====================================")
 print("        PROJECT HANDOFF REPORT")
 print("====================================")
 
+print("New Owner:", new_owner)
 print("Project Status:", status)
 print("Handoff Date:", handoff_date)
 print("\nProject:", project_name)
