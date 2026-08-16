@@ -27,38 +27,52 @@ print("\nEnter next actions:")
 next_actions = input("> ")
 
 
-print("\n====================================")
-print("        PROJECT HANDOFF REPORT")
-print("====================================")
+# Create the report
+report = f"""
+====================================
+        PROJECT HANDOFF REPORT
+====================================
 
-print("\nProject:", project_name)
-print("Current Owner:", owner)
-print("New Owner:", new_owner)
-print("Project Status:", status)
-print("Handoff Date:", handoff_date)
+Project: {project_name}
+Current Owner: {owner}
+New Owner: {new_owner}
+Project Status: {status}
+Handoff Date: {handoff_date}
 
-print("\n✅ COMPLETED WORK")
-print(completed)
+✅ COMPLETED WORK
+{completed}
 
-print("\n🔄 WORK IN PROGRESS")
-print(in_progress)
+🔄 WORK IN PROGRESS
+{in_progress}
 
-print("\n⚠️ BLOCKERS")
-print(blockers)
+⚠️ BLOCKERS
+{blockers}
 
-print("\n🧠 IMPORTANT DECISIONS")
-print(decisions)
+🧠 IMPORTANT DECISIONS
+{decisions}
 
-print("\n📌 NEXT ACTIONS")
-print(next_actions)
+📌 NEXT ACTIONS
+{next_actions}
 
-print("\n📋 HANDOFF CHECKLIST")
-print("☐ Review completed work")
-print("☐ Review blockers")
-print("☐ Review important decisions")
-print("☐ Review next actions")
-print("☐ Confirm new owner")
+📋 HANDOFF CHECKLIST
+☐ Review completed work
+☐ Review blockers
+☐ Review important decisions
+☐ Review next actions
+☐ Confirm new owner
 
-print("\n====================================")
-print("     HANDOFF REPORT GENERATED")
-print("====================================")
+====================================
+     HANDOFF REPORT GENERATED
+====================================
+"""
+
+
+# Show report in terminal
+print(report)
+
+
+# Save report to file
+with open("handoff_report.txt", "w", encoding="utf-8") as file:
+    file.write(report)
+
+print("✅ Report saved as handoff_report.txt")
