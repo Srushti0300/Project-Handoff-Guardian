@@ -1,4 +1,5 @@
 from datetime import date
+
 print("====================================")
 print("       PROJECT HANDOFF GUARDIAN")
 print("====================================")
@@ -7,6 +8,7 @@ project_name = input("\nProject Name: ")
 owner = input("Current Owner: ")
 new_owner = input("New Owner: ")
 status = input("Project Status (On Track/At Risk/Blocked): ")
+
 handoff_date = date.today()
 
 print("\nEnter completed work:")
@@ -29,11 +31,11 @@ print("\n====================================")
 print("        PROJECT HANDOFF REPORT")
 print("====================================")
 
+print("\nProject:", project_name)
+print("Current Owner:", owner)
 print("New Owner:", new_owner)
 print("Project Status:", status)
 print("Handoff Date:", handoff_date)
-print("\nProject:", project_name)
-print("Current Owner:", owner)
 
 print("\n✅ COMPLETED WORK")
 print(completed)
@@ -50,13 +52,13 @@ print(decisions)
 print("\n📌 NEXT ACTIONS")
 print(next_actions)
 
-print("\n====================================")
-print("     HANDOFF REPORT GENERATED")
-print("====================================")
-
 print("\n📋 HANDOFF CHECKLIST")
 print("☐ Review completed work")
 print("☐ Review blockers")
 print("☐ Review important decisions")
 print("☐ Review next actions")
 print("☐ Confirm new owner")
+
+print("\n====================================")
+print("     HANDOFF REPORT GENERATED")
+print("====================================")
