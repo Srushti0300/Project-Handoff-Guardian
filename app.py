@@ -1,9 +1,11 @@
+from datetime import date
 print("====================================")
 print("       PROJECT HANDOFF GUARDIAN")
 print("====================================")
 
 project_name = input("\nProject Name: ")
 owner = input("Current Owner: ")
+handoff_date = date.today()
 
 print("\nEnter completed work:")
 completed = input("> ")
@@ -25,6 +27,7 @@ print("\n====================================")
 print("        PROJECT HANDOFF REPORT")
 print("====================================")
 
+print("Handoff Date:", handoff_date)
 print("\nProject:", project_name)
 print("Current Owner:", owner)
 
