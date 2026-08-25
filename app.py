@@ -26,6 +26,9 @@ decisions = input("> ")
 print("\nEnter next actions:")
 next_actions = input("> ")
 
+print("\nEnter meeting notes:")
+meeting_notes = input("> ")
+
 
 # Check missing information
 missing = []
@@ -45,6 +48,9 @@ if not decisions.strip():
 if not next_actions.strip():
     missing.append("Next actions")
 
+if not meeting_notes.strip():
+    missing.append("Meeting notes")
+
 
 # Create report
 report = f"""
@@ -58,33 +64,53 @@ New Owner: {new_owner}
 Project Status: {status}
 Handoff Date: {handoff_date}
 
-COMPLETED WORK
+====================================
+✅ COMPLETED WORK
+====================================
 {completed if completed else "Not provided"}
 
-WORK IN PROGRESS
+====================================
+🔄 WORK IN PROGRESS
+====================================
 {in_progress if in_progress else "Not provided"}
 
-BLOCKERS
+====================================
+⚠️ BLOCKERS
+====================================
 {blockers if blockers else "Not provided"}
 
-IMPORTANT DECISIONS
+====================================
+🧠 IMPORTANT DECISIONS
+====================================
 {decisions if decisions else "Not provided"}
 
-NEXT ACTIONS
+====================================
+📌 NEXT ACTIONS
+====================================
 {next_actions if next_actions else "Not provided"}
 
-HANDOFF CHECKLIST
+====================================
+📝 MEETING NOTES
+====================================
+{meeting_notes if meeting_notes else "Not provided"}
+
+====================================
+📋 HANDOFF CHECKLIST
+====================================
 ☐ Review completed work
 ☐ Review blockers
 ☐ Review important decisions
 ☐ Review next actions
 ☐ Confirm new owner
+☐ Review meeting notes
 """
 
 
-# Add missing information warning
+# Missing information warning
 if missing:
-    report += "\n⚠️ MISSING INFORMATION\n"
+    report += "\n====================================\n"
+    report += "⚠️ MISSING INFORMATION\n"
+    report += "====================================\n"
 
     for item in missing:
         report += f"- {item}\n"
@@ -92,7 +118,9 @@ if missing:
     report += "\nRecommendation: Complete the missing information before handoff.\n"
 
 else:
-    report += "\n✅ HANDOFF CHECK\n"
+    report += "\n====================================\n"
+    report += "✅ HANDOFF CHECK\n"
+    report += "====================================\n"
     report += "All important information has been provided.\n"
 
 
