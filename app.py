@@ -30,7 +30,72 @@ print("\nEnter meeting notes:")
 meeting_notes = input("> ")
 
 
-# Check missing information
+# -----------------------------
+# Automatic Action Extraction
+# -----------------------------
+
+actions = []
+
+sentences = meeting_notes.replace("!", ".").replace("?", ".").split(".")
+
+for sentence in sentences:
+    sentence = sentence.strip()
+
+    if not sentence:
+        continue
+
+    words = sentence.lower()
+
+    action_words = [
+        "need to",
+        "should",
+        "must",
+        "will",
+        "complete",
+        "finish",
+        "create",
+        "update",
+        "fix",
+        "review",
+        "test",
+        "prepare"
+    ]
+
+    if any(word in words for word in action_words):
+        actions.append(sentence)
+
+
+# -----------------------------
+# Automatic Decision Extraction
+# -----------------------------
+
+detected_decisions = []
+
+for sentence in sentences:
+    sentence = sentence.strip()
+
+    if not sentence:
+        continue
+
+    words = sentence.lower()
+
+    decision_words = [
+        "decided",
+        "decision",
+        "agreed",
+        "selected",
+        "chosen",
+        "approved"
+    ]
+
+    if any(word in words for word in decision_words):
+        detected_decisions.append(sentence)
+
+
+# -----------------------------
+# Missing Information Check
+# -----------------------------
+
 missing = []
 
 if not completed.strip():
@@ -52,7 +117,10 @@ if not meeting_notes.strip():
     missing.append("Meeting notes")
 
 
-# Create report
+# -----------------------------
+# Create Report
+# -----------------------------
+
 report = f"""
 ====================================
         PROJECT HANDOFF REPORT
@@ -65,37 +133,63 @@ Project Status: {status}
 Handoff Date: {handoff_date}
 
 ====================================
-✅ COMPLETED WORK
+COMPLETED WORK
 ====================================
 {completed if completed else "Not provided"}
 
 ====================================
-🔄 WORK IN PROGRESS
+WORK IN PROGRESS
 ====================================
 {in_progress if in_progress else "Not provided"}
 
 ====================================
-⚠️ BLOCKERS
+BLOCKERS
 ====================================
 {blockers if blockers else "Not provided"}
 
 ====================================
-🧠 IMPORTANT DECISIONS
+IMPORTANT DECISIONS
 ====================================
 {decisions if decisions else "Not provided"}
 
 ====================================
-📌 NEXT ACTIONS
+NEXT ACTIONS
 ====================================
 {next_actions if next_actions else "Not provided"}
 
 ====================================
-📝 MEETING NOTES
+MEETING NOTES
 ====================================
 {meeting_notes if meeting_notes else "Not provided"}
 
 ====================================
-📋 HANDOFF CHECKLIST
+🤖 DETECTED ACTION ITEMS
+====================================
+"""
+
+if actions:
+    for number, action in enumerate(actions, start=1):
+        report += f"{number}. {action}\n"
+else:
+    report += "No action items detected.\n"
+
+
+report += """
+====================================
+🧠 DETECTED DECISIONS
+====================================
+"""
+
+if detected_decisions:
+    for number, decision in enumerate(detected_decisions, start=1):
+        report += f"{number}. {decision}\n"
+else:
+    report += "No decisions detected.\n"
+
+
+report += """
+====================================
+HANDOFF CHECKLIST
 ====================================
 ☐ Review completed work
 ☐ Review blockers
@@ -106,11 +200,12 @@ Handoff Date: {handoff_date}
 """
 
 
-# Missing information warning
 if missing:
-    report += "\n====================================\n"
-    report += "⚠️ MISSING INFORMATION\n"
-    report += "====================================\n"
+    report += """
+====================================
+⚠️ MISSING INFORMATION
+====================================
+"""
 
     for item in missing:
         report += f"- {item}\n"
@@ -118,10 +213,12 @@ if missing:
     report += "\nRecommendation: Complete the missing information before handoff.\n"
 
 else:
-    report += "\n====================================\n"
-    report += "✅ HANDOFF CHECK\n"
-    report += "====================================\n"
-    report += "All important information has been provided.\n"
+    report += """
+====================================
+✅ HANDOFF CHECK
+====================================
+All important information has been provided.
+"""
 
 
 report += """
@@ -131,7 +228,7 @@ report += """
 """
 
 
-# Show report
+# Display report
 print(report)
 
 
