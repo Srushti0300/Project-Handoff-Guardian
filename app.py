@@ -30,10 +30,7 @@ print("\nEnter meeting notes:")
 meeting_notes = input("> ")
 
 
-# -----------------------------
-# Automatic Action Extraction
-# -----------------------------
-
+# Action extraction
 actions = []
 
 sentences = meeting_notes.replace("!", ".").replace("?", ".").split(".")
@@ -65,10 +62,7 @@ for sentence in sentences:
         actions.append(sentence)
 
 
-# -----------------------------
-# Automatic Decision Extraction
-# -----------------------------
-
+# Decision extraction
 detected_decisions = []
 
 for sentence in sentences:
@@ -92,10 +86,7 @@ for sentence in sentences:
         detected_decisions.append(sentence)
 
 
-# -----------------------------
-# Missing Information Check
-# -----------------------------
-
+# Missing information check
 missing = []
 
 if not completed.strip():
@@ -117,10 +108,26 @@ if not meeting_notes.strip():
     missing.append("Meeting notes")
 
 
-# -----------------------------
-# Create Report
-# -----------------------------
+# Project knowledge summary
+summary = f"""
+Project '{project_name}' is currently {status}.
+The current owner is {owner} and the new owner is {new_owner}.
 
+Completed work:
+{completed if completed else "Not provided"}
+
+Current work:
+{in_progress if in_progress else "Not provided"}
+
+Main blockers:
+{blockers if blockers else "No blockers provided"}
+
+Next priority:
+{next_actions if next_actions else "Not provided"}
+"""
+
+
+# Create report
 report = f"""
 ====================================
         PROJECT HANDOFF REPORT
@@ -187,9 +194,17 @@ else:
     report += "No decisions detected.\n"
 
 
+report += f"""
+====================================
+🧠 PROJECT KNOWLEDGE SUMMARY
+====================================
+{summary}
+"""
+
+
 report += """
 ====================================
-HANDOFF CHECKLIST
+📋 HANDOFF CHECKLIST
 ====================================
 ☐ Review completed work
 ☐ Review blockers
