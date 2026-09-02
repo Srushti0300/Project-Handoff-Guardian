@@ -30,104 +30,77 @@ print("\nEnter meeting notes:")
 meeting_notes = input("> ")
 
 
-# Action extraction
-actions = []
+# -----------------------------
+# Project Knowledge
+# -----------------------------
 
-sentences = meeting_notes.replace("!", ".").replace("?", ".").split(".")
-
-for sentence in sentences:
-    sentence = sentence.strip()
-
-    if not sentence:
-        continue
-
-    words = sentence.lower()
-
-    action_words = [
-        "need to",
-        "should",
-        "must",
-        "will",
-        "complete",
-        "finish",
-        "create",
-        "update",
-        "fix",
-        "review",
-        "test",
-        "prepare"
-    ]
-
-    if any(word in words for word in action_words):
-        actions.append(sentence)
+knowledge = {
+    "project": project_name,
+    "owner": owner,
+    "new_owner": new_owner,
+    "status": status,
+    "completed": completed,
+    "in_progress": in_progress,
+    "blockers": blockers,
+    "decisions": decisions,
+    "next_actions": next_actions,
+    "meeting_notes": meeting_notes
+}
 
 
-# Decision extraction
-detected_decisions = []
+# -----------------------------
+# Simple AI Assistant
+# -----------------------------
 
-for sentence in sentences:
-    sentence = sentence.strip()
+print("\n====================================")
+print("       🤖 HANDOFF ASSISTANT")
+print("====================================")
 
-    if not sentence:
-        continue
+while True:
 
-    words = sentence.lower()
+    question = input("\nAsk about the project (or type 'done'): ")
 
-    decision_words = [
-        "decided",
-        "decision",
-        "agreed",
-        "selected",
-        "chosen",
-        "approved"
-    ]
+    if question.lower() == "done":
+        break
 
-    if any(word in words for word in decision_words):
-        detected_decisions.append(sentence)
+    q = question.lower()
 
+    if "owner" in q:
+        print("🤖 Current Owner:", owner)
+        print("🤖 New Owner:", new_owner)
 
-# Missing information check
-missing = []
+    elif "status" in q:
+        print("🤖 Project Status:", status)
 
-if not completed.strip():
-    missing.append("Completed work")
+    elif "completed" in q:
+        print("🤖 Completed Work:", completed)
 
-if not in_progress.strip():
-    missing.append("Work in progress")
+    elif "progress" in q or "working" in q:
+        print("🤖 Work in Progress:", in_progress)
 
-if not blockers.strip():
-    missing.append("Blockers")
+    elif "blocker" in q or "problem" in q:
+        print("🤖 Current Blockers:", blockers)
 
-if not decisions.strip():
-    missing.append("Important decisions")
+    elif "decision" in q:
+        print("🤖 Important Decisions:", decisions)
 
-if not next_actions.strip():
-    missing.append("Next actions")
+    elif "next" in q or "action" in q:
+        print("🤖 Next Actions:", next_actions)
 
-if not meeting_notes.strip():
-    missing.append("Meeting notes")
+    elif "meeting" in q or "notes" in q:
+        print("🤖 Meeting Notes:", meeting_notes)
 
+    elif "project" in q:
+        print("🤖 Project:", project_name)
 
-# Project knowledge summary
-summary = f"""
-Project '{project_name}' is currently {status}.
-The current owner is {owner} and the new owner is {new_owner}.
-
-Completed work:
-{completed if completed else "Not provided"}
-
-Current work:
-{in_progress if in_progress else "Not provided"}
-
-Main blockers:
-{blockers if blockers else "No blockers provided"}
-
-Next priority:
-{next_actions if next_actions else "Not provided"}
-"""
+    else:
+        print("🤖 I don't have information about that yet.")
 
 
-# Create report
+# -----------------------------
+# Create Report
+# -----------------------------
+
 report = f"""
 ====================================
         PROJECT HANDOFF REPORT
@@ -170,39 +143,10 @@ MEETING NOTES
 {meeting_notes if meeting_notes else "Not provided"}
 
 ====================================
-🤖 DETECTED ACTION ITEMS
+🤖 HANDOFF ASSISTANT
 ====================================
-"""
+The project knowledge is available through the interactive assistant.
 
-if actions:
-    for number, action in enumerate(actions, start=1):
-        report += f"{number}. {action}\n"
-else:
-    report += "No action items detected.\n"
-
-
-report += """
-====================================
-🧠 DETECTED DECISIONS
-====================================
-"""
-
-if detected_decisions:
-    for number, decision in enumerate(detected_decisions, start=1):
-        report += f"{number}. {decision}\n"
-else:
-    report += "No decisions detected.\n"
-
-
-report += f"""
-====================================
-🧠 PROJECT KNOWLEDGE SUMMARY
-====================================
-{summary}
-"""
-
-
-report += """
 ====================================
 📋 HANDOFF CHECKLIST
 ====================================
@@ -212,42 +156,14 @@ report += """
 ☐ Review next actions
 ☐ Confirm new owner
 ☐ Review meeting notes
-"""
 
-
-if missing:
-    report += """
-====================================
-⚠️ MISSING INFORMATION
-====================================
-"""
-
-    for item in missing:
-        report += f"- {item}\n"
-
-    report += "\nRecommendation: Complete the missing information before handoff.\n"
-
-else:
-    report += """
-====================================
-✅ HANDOFF CHECK
-====================================
-All important information has been provided.
-"""
-
-
-report += """
 ====================================
      HANDOFF REPORT GENERATED
 ====================================
 """
 
+print("\n" + report)
 
-# Display report
-print(report)
-
-
-# Save report
 with open("handoff_report.txt", "w", encoding="utf-8") as file:
     file.write(report)
 

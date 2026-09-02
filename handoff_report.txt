@@ -3,71 +3,46 @@
         PROJECT HANDOFF REPORT
 ====================================
 
-Project: s
-Current Owner: h
-New Owner: h
-Project Status: n
-Handoff Date: 2026-08-31
+Project: d
+Current Owner: s
+New Owner: w
+Project Status: w
+Handoff Date: 2026-09-02
 
 ====================================
 COMPLETED WORK
 ====================================
-j
+a
 
 ====================================
 WORK IN PROGRESS
 ====================================
-j
+s
 
 ====================================
 BLOCKERS
 ====================================
-j
+d
 
 ====================================
 IMPORTANT DECISIONS
 ====================================
-j
+d
 
 ====================================
 NEXT ACTIONS
 ====================================
-j
+w
 
 ====================================
 MEETING NOTES
 ====================================
-j
+we
 
 ====================================
-🤖 DETECTED ACTION ITEMS
+🤖 HANDOFF ASSISTANT
 ====================================
-No action items detected.
-
-====================================
-🧠 DETECTED DECISIONS
-====================================
-No decisions detected.
-
-====================================
-🧠 PROJECT KNOWLEDGE SUMMARY
-====================================
-
-Project 's' is currently n.
-The current owner is h and the new owner is h.
-
-Completed work:
-j
-
-Current work:
-j
-
-Main blockers:
-j
-
-Next priority:
-j
-
+The project knowledge is available through the interactive assistant.
 
 ====================================
 📋 HANDOFF CHECKLIST
@@ -78,11 +53,6 @@ j
 ☐ Review next actions
 ☐ Confirm new owner
 ☐ Review meeting notes
-
-====================================
-✅ HANDOFF CHECK
-====================================
-All important information has been provided.
 
 ====================================
      HANDOFF REPORT GENERATED
